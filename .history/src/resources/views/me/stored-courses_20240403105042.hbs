@@ -1,0 +1,51 @@
+<div class="mt-4">
+    <h3>Khoá học của tôi</h3>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Khoá học</th>
+                <th scope="col">Trình độ</th>
+                <th scope="col" colspan="2">Thời gian tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{ sum @index 1 }}</th>
+                <td>{{ this.name }}</td>
+                <td>{{ this.level }}</td>
+                <td>{{ this.createdAt }}</td>
+                <td>
+                    <a href="/courses/{{ this._id }}/edit" class="btn btn-link">
+                        <button type="button" class="btn btn-primary">Sửa</button></a>
+                    <a href="/courses/{{ this._id }}" class="btn btn-link" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ this._id }}"><button type="button"
+                            class="btn btn-danger">Xoá</button></a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal{{ this._id }}" tabindex="-1"
+                        aria-labelledby="deleteModalLabel{{ this._id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ this._id }}">Xác nhận xoá</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Bạn có chắc chắn muốn xoá?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <!-- Đặt đường dẫn xoá trong href của nút Xác nhận -->
+                                    <a href="/courses/{{ this._id }}/delete" class="btn btn-danger">Xác nhận</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
